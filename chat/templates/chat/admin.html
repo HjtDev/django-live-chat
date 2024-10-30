@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h1 class="text-2xl">Admin Chat</h1>
+    <div class="mt-8">
+        <h2 class="mb-4 text-lg">Users</h2>
+        <a href="{% url 'chat:add_user' %}" class="inline-block py-2 px-6 bg-rose-600 text-white rounded-xl">Add User</a>
+
+        <div class="mt-6">
+            {% for user in users %}
+            	<div class="grid grid-cols-4 gap-4 py-2 {% cycle 'bg-gray-100' 'bg-blue-100' %}">
+                    <p class="px-2"><a href="{% url 'chat:user_detail' user.pk %}">{{ user.name }}</a></p>
+                    <p class="px-2">{{ user.email }}</p>
+                    <p class="px-2">{{ user.role }}</p>
+                    <p class="px-2 text-right">
+                        <a href="#" class="underline">Edit</a>
+                    </p>
+                </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+    <hr class="my-6">
+    {% include 'chat/partials/rooms.html' %}
+{% endblock %}
